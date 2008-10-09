@@ -19,8 +19,8 @@ module AutoFocusable
 
 private
   def set_focus method_name
-    if @is_autofocusable && !@template.instance_variable_defined?("@focus_javascript_tag")
-      @template.instance_variable_set('@focus_javascript_tag', @template.javascript_tag("$('#{tag_id(method_name)}').focus()"))
+    if @is_autofocusable && !@template.instance_variable_defined?('@focus_was_set')
+      @template.instance_variable_set('@focus_was_set', @template.javascript_tag("$('#{tag_id(method_name)}').focus()"))
     else
       ''
     end
@@ -35,7 +35,7 @@ private
   end
 
   def sanitized_method_name field
-    @sanitized_method_name ||= field.to_s.sub(/\?$/,"")
+    field.to_s.sub(/\?$/,"")
   end
 end
 
