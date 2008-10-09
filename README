@@ -1,15 +1,15 @@
 Auto Focusable Forms
 ====================
 
-Install this plugin to automatically give focus to the first input of your forms.
+Install this plugin to automatically give focus to your forms.
 
 Example
 =======
 
-After you install the plugin all your forms will have focus on the first element by default
+If you have this two forms in your view...
 
 form_for @user do |f|
-  f.text_field :name <== this field will have a $('user_name').focus() script next to it
+  f.text_field :name
   f.text_field :surname
   fields_for @post do |g|
     g.text_field :title
@@ -17,14 +17,25 @@ form_for @user do |f|
   end
 end
 
-If you want to disable this behaviour just add :autofocus => false and the form will have the original Rails behaviour
+form_for @post do |f|
+  f.text_field :title
+end
 
-Example:
+...you'll see that the name field will have focus.
+
+If you want to disable this behaviour just add :autofocus => false and the form will have the original Rails behaviour. So if for example you want to give focus to the second form in your view you'd just disable autofocus in the first form:
 
 form_for @user, :autofocus => false do |f|
   f.text_field :name
   f.text_field :surname
 end
+
+form_for @post do |f|
+  f.text_field :title
+  f.text_field :content
+end
+
+And now the focus will be in the title field.
 
 See the specs for more examples
 
