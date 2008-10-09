@@ -37,8 +37,5 @@ private
   def sanitized_method_name field
     @sanitized_method_name ||= field.to_s.sub(/\?$/,"")
   end
-
-  def get_form_builder_options args
-  end
 end
 
