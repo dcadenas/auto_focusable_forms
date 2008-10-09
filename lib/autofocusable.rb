@@ -20,7 +20,7 @@ module AutoFocusable
 private
   def set_focus method_name
     if @is_autofocusable && !@template.instance_variable_defined?('@focus_was_set')
-      @template.instance_variable_set('@focus_was_set', @template.javascript_tag("$('#{tag_id(method_name)}').focus()"))
+      @template.instance_variable_set('@focus_was_set', @template.javascript_tag("document.getElementById('#{tag_id(method_name)}').focus()"))
     else
       ''
     end

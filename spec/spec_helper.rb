@@ -5,7 +5,7 @@ $: << File.dirname(__FILE__) + '/../lib' << File.dirname(__FILE__)
 
 
 def focus_regexp field_name
-  /\$\('#{field_name}'\)\.focus\(\)/
+  /document.getElementById\('#{field_name}'\)\.focus\(\)/
 end
 
 def assert_field_has_focus field, field_name = '\w+'
