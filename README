@@ -12,7 +12,7 @@ form_for @user do |f|
   f.text_field :name <== this field will have a $('user_name').focus() script next to it
   f.text_field :surname
   fields_for @post do |g|
-    g.text_field :title <== now this input will not have focus and no other input will have
+    g.text_field :title
     g.text_area :content
   end
 end

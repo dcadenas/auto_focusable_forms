@@ -1,17 +1,8 @@
 module AutoFocusable
-  module AutoFocusableFieldsFor
-    def fields_for *args
-      opts = args.extract_options!
-      #fields_for should never be autofocusable because it's always nested
-      opts[:autofocus] = false 
-      super *(args << opts)
-    end
-  end
-
   def init *args
     form_builder_options = get_form_builder_options(args)
-    @is_autofocusable = form_builder_options[:autofocus] || !form_builder_options.has_key?(:autofocus)
-    @template.extend AutoFocusableFieldsFor
+    @is_autofocusable = true
+    @is_autofocusable = form_builder_options[:autofocus] if form_builder_options.has_key?(:autofocus)
   end
 
   def initialize *args
@@ -32,8 +23,8 @@ module AutoFocusable
 
 private
   def set_focus method_name
-    if @is_autofocusable && @focus_javascript_tag.nil?
-      @focus_javascript_tag = @template.javascript_tag "$('#{tag_id(method_name)}').focus()" 
+    if @is_autofocusable && !@template.instance_variable_defined?("@focus_javascript_tag")
+      @template.instance_variable_set('@focus_javascript_tag', @template.javascript_tag("$('#{tag_id(method_name)}').focus()"))
     else
       ''
     end
