@@ -50,8 +50,8 @@ describe 'auto focusable form' do
     form_for @post do |f|
       first = f.text_field :title
       fields_for @author do |g|
-	inner_first = g.text_field :name
-	inner_second = g.text_field :surname
+        inner_first = g.text_field :name
+        inner_second = g.text_field :surname
       end
       second = f.text_field :content
     end
@@ -62,7 +62,7 @@ describe 'auto focusable form' do
     assert_field_has_no_focus second
   end
 
-  it 'should give focus to the first form when two contiguous forms exist' do
+  it 'should give focus to the first form when two forms exist' do
     _erbout = first_form_input = second_form_input = ''
 
     form_for @post do |f|
@@ -77,7 +77,7 @@ describe 'auto focusable form' do
     assert_field_has_no_focus second_form_input
   end
 
-  it 'should give focus to the last form when the first has :autofocus => false' do
+  it 'should give focus to the second form when the first has :autofocus => false' do
     _erbout = first_form_input = second_form_input = ''
 
     form_for @post, :autofocus => false do |f|
