@@ -1,13 +1,26 @@
 AutoFocusableForms
 ==================
 
-Introduction goes here.
-
+Install this plugin to give focus to the first input of your forms automatically.
 
 Example
 =======
 
-Example goes here.
+form_for @user do |f|
+  f.text_field :name <== this field will have a $('user_name').focus() script next to it
+  f.text_field :surname
+end
 
+If you want to disable this behaviour just add :autofocus => false
+Example:
+
+form_for @user do |f|
+  f.text_field :name <== this input will have a $('user_name').focus() script next to it
+  fields_for @post, :autofocus => false do |g|
+    g.text_field :title <== now this input will not have focus and no other input will have
+    g.text_field :content
+  end
+  f.text_field :surname
+end
 
 Copyright (c) 2008 [name of plugin creator], released under the MIT license
