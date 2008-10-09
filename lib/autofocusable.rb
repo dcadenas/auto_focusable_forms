@@ -1,13 +1,9 @@
 module AutoFocusable
-  def init *args
-    form_builder_options = get_form_builder_options(args)
-    @is_autofocusable = true
-    @is_autofocusable = form_builder_options[:autofocus] if form_builder_options.has_key?(:autofocus)
-  end
-
-  def initialize *args
-    super
-    init *args
+  def self.extended form_builder_instance
+    form_builder_instance.instance_eval do
+      @is_autofocusable = true
+      @is_autofocusable = @options[:autofocus] if @options.has_key?(:autofocus)
+    end
   end
 
   helpers = ActionView::Helpers::FormBuilder.field_helpers +
@@ -43,8 +39,6 @@ private
   end
 
   def get_form_builder_options args
-    args.pop #we ignore the last parameter to find the options hash
-    args.extract_options!
   end
 end
 

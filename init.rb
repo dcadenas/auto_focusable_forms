@@ -7,7 +7,6 @@ module FormBuilderAutoFocusExtender
   def new *args
     returning super do |form_builder_instance|
       form_builder_instance.extend AutoFocusable
-      form_builder_instance.init *args
     end
   end
 end
