@@ -62,6 +62,24 @@ describe 'auto focusable form' do
     assert_field_has_no_focus second
   end
 
+  it 'should give focus to the first element of an inner fields_for if it is the first element in the forms_form' do
+    _erbout = first = second = inner_first = inner_second = ''
+
+    form_for @post do |f|
+      fields_for @author do |g|
+        inner_first = g.text_field :name
+        inner_second = g.text_field :surname
+      end
+      first = f.text_field :title
+      second = f.text_field :content
+    end
+
+    assert_field_has_focus inner_first
+    assert_field_has_no_focus inner_second
+    assert_field_has_no_focus first
+    assert_field_has_no_focus second
+  end
+
   it 'should give focus to the first form when two forms exist' do
     _erbout = first_form_input = second_form_input = ''
 
