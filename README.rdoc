@@ -1,0 +1,71 @@
+= auto_focusable_forms
+
+* http://github.com/dcadenas/auto_focusable_forms
+
+== DESCRIPTION:
+
+Install this plugin to automatically give focus to your forms.
+
+== SYNOPSIS:
+
+If you have this two forms in your view...
+
+  form_for @user do |f|
+    f.text_field :name
+    f.text_field :surname
+    fields_for @post do |g|
+      g.text_field :title
+      g.text_area :content
+    end
+  end
+
+  form_for @post do |f|
+    f.text_field :title
+  end
+
+...you'll see that the name field will have focus.
+
+If you want to disable this behaviour just add :autofocus => false and the form will have the original Rails behaviour. So if for example you want to give focus to the second form in your view you'd just disable autofocus in the first form:
+
+  form_for @user, :autofocus => false do |f|
+    f.text_field :name
+    f.text_field :surname
+  end
+  
+  form_for @post do |f|
+    f.text_field :title
+    f.text_field :content
+  end
+
+And now the focus will be in the title field.
+
+See the specs for more examples
+
+== INSTALL:
+
+    $ sudo ruby script/plugin install git://github.com/dcadenas/auto_focusable_forms.git
+
+== LICENSE:
+
+(The MIT License)
+
+Copyright (c) 2008 Daniel Cadenas
+
+Permission is hereby granted, free of charge, to any person obtaining
+a copy of this software and associated documentation files (the
+'Software'), to deal in the Software without restriction, including
+without limitation the rights to use, copy, modify, merge, publish,
+distribute, sublicense, and/or sell copies of the Software, and to
+permit persons to whom the Software is furnished to do so, subject to
+the following conditions:
+
+The above copyright notice and this permission notice shall be
+included in all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED 'AS IS', WITHOUT WARRANTY OF ANY KIND,
+EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
+IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY
+CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
+TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
+SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
