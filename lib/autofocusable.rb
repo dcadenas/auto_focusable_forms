@@ -13,17 +13,27 @@ module AutoFocusable
 
   helpers.each do |name|
     define_method(name) do |field, *args|
-      super + set_focus(field)
+      super + set_focus(field, args.extract_options!)
     end
   end
 
 private
-  def set_focus method_name
+  def set_focus method_name, options
+    return '' if is_disabled?(options) || is_readonly?(options)
+    
     if @is_autofocusable && !@template.instance_variable_defined?('@focus_was_set')
       @template.instance_variable_set('@focus_was_set', @template.javascript_tag("document.getElementById('#{tag_id(method_name)}').focus()"))
     else
       ''
     end
+  end
+  
+  def is_disabled? options
+    options.has_key?(:disabled) && options[:disabled] != false  
+  end
+
+  def is_readonly? options
+    options.has_key?(:readonly) && options[:readonly] != false  
   end
 
   def tag_id field

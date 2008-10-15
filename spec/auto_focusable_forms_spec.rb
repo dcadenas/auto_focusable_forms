@@ -109,4 +109,76 @@ describe 'auto focusable form' do
     assert_field_has_no_focus first_form_input
     assert_field_has_focus second_form_input
   end
+
+  it 'should give focus to the second input when the first has :disabled => "something"' do
+    _erbout = first_input = second_input = ''
+
+    form_for @post do |f|
+      first_input = f.text_field :title, :disabled => 'something'
+      second_input = f.text_field :content
+    end
+
+    assert_field_has_no_focus first_input
+    assert_field_has_focus second_input
+  end
+
+  it 'should give focus to the second input when the first has :disabled => true' do
+    _erbout = first_input = second_input = ''
+
+    form_for @post do |f|
+      first_input = f.text_field :title, :disabled => true
+      second_input = f.text_field :content
+    end
+
+    assert_field_has_no_focus first_input
+    assert_field_has_focus second_input
+  end
+
+  it 'should still give focus to the first input when is :disabled => false' do
+    _erbout = first_input = second_input = ''
+
+    form_for @post do |f|
+      first_input = f.text_field :title, :disabled => false
+      second_input = f.text_field :content
+    end
+
+    assert_field_has_focus first_input
+    assert_field_has_no_focus second_input
+  end
+
+  it 'should give focus to the second input when the first has :readonly => "something"' do
+    _erbout = first_input = second_input = ''
+
+    form_for @post do |f|
+      first_input = f.text_field :title, :readonly => 'something'
+      second_input = f.text_field :content
+    end
+
+    assert_field_has_no_focus first_input
+    assert_field_has_focus second_input
+  end
+
+  it 'should give focus to the second input when the first has :readonly => true' do
+    _erbout = first_input = second_input = ''
+
+    form_for @post do |f|
+      first_input = f.text_field :title, :readonly => true
+      second_input = f.text_field :content
+    end
+
+    assert_field_has_no_focus first_input
+    assert_field_has_focus second_input
+  end
+
+  it 'should still give focus to the first input when is :readonly => false' do
+    _erbout = first_input = second_input = ''
+
+    form_for @post do |f|
+      first_input = f.text_field :title, :readonly => false
+      second_input = f.text_field :content
+    end
+
+    assert_field_has_focus first_input
+    assert_field_has_no_focus second_input
+  end
 end
