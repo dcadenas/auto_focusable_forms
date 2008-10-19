@@ -43,7 +43,7 @@ See the specs for more examples
 
 == INSTALL:
 
-    $ sudo ruby script/plugin install git://github.com/dcadenas/auto_focusable_forms.git
+    $ ruby script/plugin install git://github.com/dcadenas/auto_focusable_forms.git
 
 == LICENSE:
 
