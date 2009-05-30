@@ -7,6 +7,8 @@ require 'rexml/document'
 require 'rspec_hpricot_matchers'
 
 module ViewTestHelper
+  attr_accessor :output_buffer
+
   include ActionView::Helpers::FormHelper
   include ActionView::Helpers::FormTagHelper
   include ActionView::Helpers::UrlHelper
@@ -14,6 +16,7 @@ module ViewTestHelper
   include ActionView::Helpers::TextHelper
   include ActionView::Helpers::ActiveRecordHelper
   include ActionView::Helpers::RecordIdentificationHelper
+  include ActionView::Helpers::CaptureHelper
   include ActiveSupport
   include ActionController::PolymorphicRoutes
 
