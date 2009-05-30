@@ -22,7 +22,10 @@ private
     return '' if is_disabled?(options) || is_readonly?(options)
     
     if @is_autofocusable && !@template.instance_variable_defined?('@focus_was_set')
-      @template.instance_variable_set('@focus_was_set', @template.javascript_tag("document.getElementById('#{tag_id(method_name)}').focus()"))
+      @template.instance_variable_set('@focus_was_set', @template.javascript_tag(<<-JSCODE))
+        document.getElementById('#{tag_id(method_name)}').focus();
+        document.getElementById('#{tag_id(method_name)}').value = document.getElementById('#{tag_id(method_name)}').value;
+      JSCODE
     else
       ''
     end
